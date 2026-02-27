@@ -187,7 +187,6 @@ data/
 | JavaScript | バニラJS（ES Modules） | ビルドステップ不要、GitHub Pagesと相性良好 |
 | データ形式 | JSON | 可読性高く、PR管理に適する |
 | ホスティング | GitHub Pages | 静的サイト配信、無料 |
-| CI/CD | GitHub Actions | 自動デプロイ |
 
 ### 5.2 ディレクトリ構成（案）
 
@@ -207,16 +206,13 @@ rfc-tangocho/
 │   └── categories.json # カテゴリ定義
 ├── docs/
 │   └── requirements.md # 本要件定義書
-├── .github/
-│   └── workflows/
-│       └── deploy.yml  # GitHub Actions（GitHub Pages自動デプロイ）
 └── README.md
 ```
 
 ### 5.3 GitHub Pages デプロイ方法
-- `main` ブランチへのマージをトリガーに GitHub Actions が自動デプロイ
-- Actions の `actions/deploy-pages` を使用
-- ビルド不要のため、リポジトリのファイルをそのままデプロイ
+- GitHub リポジトリの Settings > Pages で `main` ブランチのルートディレクトリ（`/`）を公開元に設定
+- `main` ブランチへのマージが即時反映される
+- GitHub Actions は使用しない（ビルド不要のため設定不要）
 
 ---
 
@@ -274,7 +270,7 @@ rfc-tangocho/
 |---|---|---|
 | Phase 1 | データ整備 | `rfcs.json`, `categories.json` の初期データ作成 |
 | Phase 2 | 基本UI実装 | トップ画面 + クイズ機能（SCR-01〜SCR-04） |
-| Phase 3 | GitHub Pages デプロイ設定 | `.github/workflows/deploy.yml` |
+| Phase 3 | GitHub Pages 設定確認 | GitHub Settings > Pages で `main` ブランチのルートを公開元に設定 |
 | Phase 4 | フラッシュカード機能追加 | SCR-05 実装 |
 | Phase 5 | 一覧・検索機能追加 | SCR-06 実装 |
 | Phase 6 | 学習進捗保存 | localStorage連携 |

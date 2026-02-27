@@ -53,4 +53,4 @@ RFC データは `data/rfcs.json` で管理しています。
 - HTML5 + CSS3 + バニラJavaScript（ES Modules）
 - データ: JSON（ビルド不要）
 - ホスティング: GitHub Pages
-- CI/CD: GitHub Actions
+- デプロイ: GitHub Pages（mainブランチのルートを直接公開）
