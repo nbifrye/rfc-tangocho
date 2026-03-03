@@ -21,9 +21,16 @@ function renderHome() {
   const totalCorrect = Object.values(progress).reduce((sum, entry) => sum + (entry.correct ?? 0), 0);
 
   app.innerHTML = `
-    <section class="card">
+    <section class="card hero">
       <h2>学習モードを選択</h2>
-      <p>RFC番号と名称の対応をクイズやフラッシュカードで学習できます。</p>
+      <p>RFC番号と正式名称の対応を、クイズとフラッシュカードで効率よく覚えましょう。</p>
+      <div class="hero-stats">
+        <div class="stat-chip"><strong>${totalCorrect}</strong>累計正解数</div>
+        <div class="stat-chip"><strong>${totalAttempted}</strong>累計挑戦数</div>
+      </div>
+    </section>
+    <section class="card">
+      <h3>モードを選んで学習開始</h3>
       <div class="grid two">
         <button class="btn" data-go="quiz">クイズを始める</button>
         <button class="btn" data-go="flashcard">フラッシュカードを始める</button>
@@ -31,7 +38,8 @@ function renderHome() {
     </section>
     <section class="card">
       <h3>進捗サマリー</h3>
-      <p>累計正解 / 累計挑戦: ${totalCorrect} / ${totalAttempted}</p>
+      <p>累計正解 / 累計挑戦: <strong>${totalCorrect}</strong> / <strong>${totalAttempted}</strong></p>
+      <p><small>「一覧・検索」タブでは、RFCごとの学習状況を詳細に確認できます。</small></p>
     </section>
   `;
 
