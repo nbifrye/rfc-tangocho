@@ -28,12 +28,12 @@ export function renderSearch(container, data) {
           ${data.categories
             .map(
               (category) =>
-                `<label><input type="checkbox" class="category-filter" value="${category.id}" checked /> ${category.label}</label>`
+                `<label class="check-option"><input type="checkbox" class="category-filter" value="${category.id}" checked /><span>${category.label}</span></label>`
             )
             .join('')}
         </div>
       </fieldset>
-      <label><input id="show-obsoleted" type="checkbox" checked /> 廃止済みRFCも表示</label>
+      <label class="check-option"><input id="show-obsoleted" type="checkbox" checked /><span>廃止済みRFCも表示</span></label>
     </section>
     <section class="card">
       <div class="table-wrap">

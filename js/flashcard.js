@@ -23,7 +23,7 @@ export function renderFlashcard(container, data, options = {}) {
               .join('')}
           </select>
         </label>
-        <label><input id="flashcard-obsoleted" type="checkbox" /> 廃止済みRFCを含める</label>
+        <label class="check-option"><input id="flashcard-obsoleted" type="checkbox" /><span>廃止済みRFCを含める</span></label>
       </div>
       <button class="btn" id="start-flashcard">開始</button>
     </section>
