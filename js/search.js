@@ -11,7 +11,7 @@ export function renderSearch(container, data) {
   container.innerHTML = `
     <section class="card">
       <h2>一覧・検索</h2>
-      <div class="grid two">
+      <div class="form-grid grid two">
         <label>キーワード
           <input id="search-input" placeholder="RFC番号または名称" />
         </label>
@@ -24,7 +24,7 @@ export function renderSearch(container, data) {
       </div>
       <fieldset>
         <legend>カテゴリフィルタ（複数選択可）</legend>
-        <div class="grid two">
+        <div class="grid two" style="margin-top:0.5rem">
           ${data.categories
             .map(
               (category) =>
@@ -33,13 +33,19 @@ export function renderSearch(container, data) {
             .join('')}
         </div>
       </fieldset>
-      <label class="check-option"><input id="show-obsoleted" type="checkbox" checked /><span>廃止済みRFCも表示</span></label>
+      <label class="check-option" style="margin-top:0.5rem"><input id="show-obsoleted" type="checkbox" checked /><span>廃止済みRFCも表示</span></label>
     </section>
-    <section class="card">
+    <section class="card" style="padding:0;overflow:hidden">
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>RFC</th><th>名称</th><th>カテゴリ</th><th>状態</th><th>進捗</th></tr>
+            <tr>
+              <th>RFC</th>
+              <th>名称</th>
+              <th>カテゴリ</th>
+              <th>状態</th>
+              <th>進捗</th>
+            </tr>
           </thead>
           <tbody id="search-results"></tbody>
         </table>
@@ -71,18 +77,23 @@ export function renderSearch(container, data) {
       .map((item) => {
         const stat = progress[String(item.number)];
         const status = item.obsoletedBy === null ? '' : '<span class="badge">廃止済</span>';
-        const progressText = stat ? `${stat.correct}/${stat.attempted}` : '';
+        const progressText = stat ? `${stat.correct} / ${stat.attempted}` : '—';
         const categoryLabel = data.categoryMap.get(item.category)?.label ?? 'その他';
         return `<tr>
-          <td>${item.number}</td>
-          <td>${item.name}${item.shortName ? `<br/><small>${item.shortName}</small>` : ''}</td>
-          <td>${categoryLabel}</td>
+          <td class="td-rfc">${item.number}</td>
+          <td>
+            <span>${item.name}</span>
+            ${item.shortName ? `<br/><span class="td-shortname">${item.shortName}</span>` : ''}
+          </td>
+          <td><small>${categoryLabel}</small></td>
           <td>${status}</td>
-          <td>${progressText}</td>
+          <td class="td-progress">${progressText}</td>
         </tr>`;
       });
 
-    resultBody.innerHTML = rows.length ? rows.join('') : '<tr><td colspan="5">該当するRFCがありません。</td></tr>';
+    resultBody.innerHTML = rows.length
+      ? rows.join('')
+      : '<tr><td colspan="5" style="color:var(--text-muted);font-family:var(--mono);font-size:0.8rem">該当するRFCがありません</td></tr>';
   };
 
   [input, sortMode, obsoletedToggle, ...categoryChecks].forEach((element) => {
