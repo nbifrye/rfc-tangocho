@@ -60,8 +60,6 @@ function runDeck(stage, initialDeck, categoryMap) {
     return `
       <p class="flashcard-hint">RFC NUMBER</p>
       <p class="flashcard-rfc">RFC ${card.number}</p>
-      <p class="flashcard-title">${card.name}</p>
-      <p class="flashcard-note">${card.note ?? '概要情報なし'}</p>
       <p class="flashcard-category">${categoryLabel}</p>
     `;
   }
