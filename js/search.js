@@ -36,12 +36,14 @@ export function renderSearch(container, data) {
       <label><input id="show-obsoleted" type="checkbox" checked /> 廃止済みRFCも表示</label>
     </section>
     <section class="card">
-      <table>
-        <thead>
-          <tr><th>RFC</th><th>名称</th><th>カテゴリ</th><th>状態</th><th>進捗</th></tr>
-        </thead>
-        <tbody id="search-results"></tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>RFC</th><th>名称</th><th>カテゴリ</th><th>状態</th><th>進捗</th></tr>
+          </thead>
+          <tbody id="search-results"></tbody>
+        </table>
+      </div>
     </section>
   `;
 
