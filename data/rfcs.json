@@ -1,0 +1,14 @@
+[
+  { "number": 791, "name": "Internet Protocol", "shortName": "IP", "category": "network", "obsoletedBy": null, "note": "IPv4の基本仕様。" },
+  { "number": 792, "name": "Internet Control Message Protocol", "shortName": "ICMP", "category": "network", "obsoletedBy": null, "note": "疎通確認やエラー通知に利用される。" },
+  { "number": 793, "name": "Transmission Control Protocol", "shortName": "TCP", "category": "transport", "obsoletedBy": 9293, "note": "信頼性のある接続型プロトコル。" },
+  { "number": 768, "name": "User Datagram Protocol", "shortName": "UDP", "category": "transport", "obsoletedBy": null, "note": "コネクションレスで軽量。" },
+  { "number": 1035, "name": "Domain Names - Implementation and Specification", "shortName": "DNS", "category": "application", "obsoletedBy": null, "note": "DNSメッセージ形式や運用の基本。" },
+  { "number": 2616, "name": "Hypertext Transfer Protocol -- HTTP/1.1", "shortName": "HTTP/1.1", "category": "application", "obsoletedBy": 9110, "note": "HTTP/1.1の旧仕様。" },
+  { "number": 9110, "name": "HTTP Semantics", "shortName": "HTTP", "category": "application", "obsoletedBy": null, "note": "HTTP意味論の現行仕様。" },
+  { "number": 8446, "name": "The Transport Layer Security (TLS) Protocol Version 1.3", "shortName": "TLS 1.3", "category": "security", "obsoletedBy": null, "note": "TLS 1.3仕様。" },
+  { "number": 5321, "name": "Simple Mail Transfer Protocol", "shortName": "SMTP", "category": "application", "obsoletedBy": null, "note": "電子メール転送プロトコル。" },
+  { "number": 2131, "name": "Dynamic Host Configuration Protocol", "shortName": "DHCP", "category": "operations", "obsoletedBy": null, "note": "IPアドレス自動割り当て。" },
+  { "number": 6762, "name": "Multicast DNS", "shortName": "mDNS", "category": "application", "obsoletedBy": null, "note": "ローカルリンクでの名前解決。" },
+  { "number": 9293, "name": "Transmission Control Protocol (TCP)", "shortName": "TCP", "category": "transport", "obsoletedBy": null, "note": "TCPの更新統合仕様。" }
+]

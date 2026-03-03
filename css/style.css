@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background: #f6f7fb;
+  color: #1e2430;
+}
+
+.site-header {
+  background: #243b6b;
+  color: #fff;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn,
+.btn,
+.choice-btn {
+  border: 1px solid #aab6d3;
+  background: #fff;
+  color: #1f2a44;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-btn.is-active {
+  background: #cfe0ff;
+  border-color: #7b97d8;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d9deea;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.grid.two {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label,
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+input,
+select {
+  padding: 0.45rem;
+  border-radius: 0.4rem;
+  border: 1px solid #c5cede;
+}
+
+.choice-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.choice-btn {
+  text-align: left;
+}
+
+.choice-btn.correct {
+  background: #d5f4de;
+  border-color: #4ba865;
+}
+
+.choice-btn.incorrect {
+  background: #ffe1e1;
+  border-color: #c04949;
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #d39b40;
+  color: #8c5d16;
+  background: #fff6e8;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.status,
+.notice {
+  background: #eef3ff;
+  border: 1px solid #c8d6f8;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.error-box {
+  background: #ffe7e7;
+  border: 1px solid #dc7a7a;
+  padding: 1rem;
+  border-radius: 0.6rem;
+}
+
+.flashcard {
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.flashcard-face {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.result {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #e0e5f0;
+  text-align: left;
+  padding: 0.45rem;
+  vertical-align: top;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0.75rem;
+  }
+}
