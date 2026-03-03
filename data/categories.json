@@ -1,8 +1,30 @@
 [
-  { "id": "transport", "label": "トランスポート" },
-  { "id": "network", "label": "ネットワーク" },
-  { "id": "application", "label": "アプリケーション" },
-  { "id": "security", "label": "セキュリティ" },
-  { "id": "operations", "label": "運用管理" },
-  { "id": "other", "label": "その他" }
+  {
+    "id": "transport",
+    "label": "トランスポート"
+  },
+  {
+    "id": "network",
+    "label": "ネットワーク"
+  },
+  {
+    "id": "application",
+    "label": "アプリケーション"
+  },
+  {
+    "id": "security",
+    "label": "セキュリティ"
+  },
+  {
+    "id": "digital-identity",
+    "label": "デジタルアイデンティティ"
+  },
+  {
+    "id": "operations",
+    "label": "運用管理"
+  },
+  {
+    "id": "other",
+    "label": "その他"
+  }
 ]

@@ -4,15 +4,23 @@ function shuffle(items) {
   return [...items].sort(() => Math.random() - 0.5);
 }
 
-export function renderFlashcard(container, data) {
+export function renderFlashcard(container, data, options = {}) {
+  const initialCategory = data.categories.some((category) => category.id === options.initialCategory)
+    ? options.initialCategory
+    : 'all';
   container.innerHTML = `
     <section class="card">
       <h2>フラッシュカード設定</h2>
       <div class="grid two">
         <label>カテゴリ
           <select id="flashcard-category">
-            <option value="all">全カテゴリ</option>
-            ${data.categories.map((category) => `<option value="${category.id}">${category.label}</option>`).join('')}
+            <option value="all" ${initialCategory === 'all' ? 'selected' : ''}>全カテゴリ</option>
+            ${data.categories
+              .map(
+                (category) =>
+                  `<option value="${category.id}" ${initialCategory === category.id ? 'selected' : ''}>${category.label}</option>`
+              )
+              .join('')}
           </select>
         </label>
         <label><input id="flashcard-obsoleted" type="checkbox" /> 廃止済みRFCを含める</label>
