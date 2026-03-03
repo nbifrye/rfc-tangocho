@@ -47,7 +47,7 @@ export function renderQuiz(container, data, options = {}) {
   container.innerHTML = `
     <section class="card">
       <h2>クイズ設定</h2>
-      <form id="quiz-form" class="grid two">
+      <form id="quiz-form" class="form-grid grid two">
         <label>出題形式
           <select name="mode">
             <option value="number-to-name">番号 → 名称</option>
@@ -72,10 +72,12 @@ export function renderQuiz(container, data, options = {}) {
               .join('')}
           </select>
         </label>
-        <label class="check-option"><input type="checkbox" name="includeObsoleted" /><span>廃止済みRFCを含める</span></label>
-        <label class="check-option"><input type="checkbox" name="weakOnly" ${isStorageAvailable() ? '' : 'disabled'} /><span>苦手問題のみ出題</span></label>
+        <div class="grid" style="gap:0.5rem">
+          <label class="check-option"><input type="checkbox" name="includeObsoleted" /><span>廃止済みRFCを含める</span></label>
+          <label class="check-option"><input type="checkbox" name="weakOnly" ${isStorageAvailable() ? '' : 'disabled'} /><span>苦手問題のみ出題</span></label>
+        </div>
       </form>
-      <button class="btn" id="start-quiz">開始</button>
+      <button class="btn btn-wide" id="start-quiz">開始</button>
     </section>
     <section id="quiz-stage"></section>
   `;
@@ -114,20 +116,31 @@ function runQuiz(stage, questions, mode, allRfcs) {
   function renderQuestion() {
     const current = questions[index];
     const options = buildOptions(allRfcs, current);
+    const pct = Math.round((index / questions.length) * 100);
+
     stage.innerHTML = `
       <article class="card">
-        <p>問 ${index + 1} / ${questions.length}</p>
-        <h3>${getQuestionText(mode, current)}</h3>
+        <div class="quiz-meta">
+          <span>問 ${index + 1} / ${questions.length}</span>
+          <div class="quiz-progress-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
+            <div class="quiz-progress-fill" style="width:${pct}%"></div>
+          </div>
+          <span>${score}正解</span>
+        </div>
+        <p class="quiz-question">${getQuestionText(mode, current)}</p>
         <div class="choice-list">
           ${options
             .map(
               (choice, optionIndex) =>
-                `<button data-number="${choice.number}" class="choice-btn">${optionIndex + 1}. ${getChoiceLabel(mode, choice)}</button>`
+                `<button data-number="${choice.number}" class="choice-btn">
+                  <span class="choice-num">[${optionIndex + 1}]</span>
+                  <span>${getChoiceLabel(mode, choice)}</span>
+                </button>`
             )
             .join('')}
         </div>
-        <p id="feedback"></p>
-        <button class="btn" id="next-button" hidden>次の問題へ</button>
+        <div class="quiz-feedback" id="feedback" aria-live="polite"></div>
+        <button class="btn btn-wide" id="next-button" hidden>次の問題へ →</button>
       </article>
     `;
 
@@ -158,10 +171,11 @@ function runQuiz(stage, questions, mode, allRfcs) {
         }
       });
 
-      feedback.textContent = correct ? '正解です！' : `不正解です。正解は RFC ${current.number} です。`;
+      feedback.textContent = correct ? '正解です！' : `不正解。正解は RFC ${current.number} です。`;
       if (current.note) {
-        feedback.textContent += ` 補足: ${current.note}`;
+        feedback.textContent += ` — ${current.note}`;
       }
+      feedback.className = `quiz-feedback ${correct ? 'is-correct' : 'is-incorrect'}`;
       nextButton.hidden = false;
       nextButton.focus();
     }
@@ -199,9 +213,10 @@ function runQuiz(stage, questions, mode, allRfcs) {
     const rate = Math.round((score / questions.length) * 100);
     stage.innerHTML = `
       <article class="card">
-        <h3>クイズ結果</h3>
-        <p class="result">${score} / ${questions.length} 問正解（正解率 ${rate}%）</p>
-        <button class="btn" id="retry-quiz">もう一度挑戦</button>
+        <h3>結果</h3>
+        <div class="result-score">${score}<span style="font-size:0.45em;color:var(--text-dim);vertical-align:middle"> / ${questions.length}</span></div>
+        <p class="result-label">正解率 ${rate}%</p>
+        <button class="btn btn-wide" id="retry-quiz">もう一度挑戦</button>
       </article>
     `;
     stage.querySelector('#retry-quiz').addEventListener('click', () => runQuiz(stage, questions, mode, allRfcs));

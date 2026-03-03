@@ -28,32 +28,54 @@ function renderHome() {
   app.innerHTML = `
     <section class="card hero">
       <h2>今日のRFC学習をはじめよう</h2>
-      <p>モバイルでも快適に、短時間でRFC番号と名称の対応を定着させる学習設計です。</p>
+      <p class="hero-sub">RFC番号と名称の対応を、クイズ・フラッシュカードで反復学習</p>
       <div class="hero-stats">
-        <div class="stat-chip"><strong>${totalCorrect}</strong>累計正解数</div>
-        <div class="stat-chip"><strong>${totalAttempted}</strong>累計挑戦数</div>
-        <div class="stat-chip"><strong>${accuracy}%</strong>正解率</div>
+        <div class="stat-chip">
+          <strong>${totalCorrect}</strong>
+          <span>正解数</span>
+        </div>
+        <div class="stat-chip">
+          <strong>${totalAttempted}</strong>
+          <span>挑戦数</span>
+        </div>
+        <div class="stat-chip">
+          <strong>${accuracy}%</strong>
+          <span>正解率</span>
+        </div>
       </div>
     </section>
+
     <section class="card">
-      <h3>モードを選んで学習開始</h3>
-      <div class="grid two">
-        <button class="btn" data-go="quiz">クイズを始める</button>
-        <button class="btn" data-go="flashcard">フラッシュカードを始める</button>
+      <h3>学習モードを選択</h3>
+      <div class="mode-grid">
+        <button class="mode-card" data-go="quiz">
+          <span class="mode-icon">[Q]</span>
+          <span class="mode-label">クイズ</span>
+          <span class="mode-desc">4択形式でRFC番号↔名称を学習</span>
+        </button>
+        <button class="mode-card" data-go="flashcard">
+          <span class="mode-icon">[F]</span>
+          <span class="mode-label">フラッシュカード</span>
+          <span class="mode-desc">カードをめくって記憶を定着</span>
+        </button>
       </div>
     </section>
+
     <section class="card">
-      <h3>ジャンル特化で学ぶ</h3>
-      <p>まずはデジタルアイデンティティ関連のRFCに集中して学習できます。</p>
-      <div class="grid two">
-        <button class="btn" data-go="quiz" data-category="digital-identity">デジタルアイデンティティクイズ</button>
-        <button class="btn" data-go="flashcard" data-category="digital-identity">デジタルアイデンティティカード</button>
+      <h3>ジャンル特化</h3>
+      <p style="font-size:0.84rem;color:var(--text-dim);margin:0 0 0.9rem;">デジタルアイデンティティ（OAuth・JWT・TLS など）に集中して学習</p>
+      <div class="mode-grid">
+        <button class="mode-card" data-go="quiz" data-category="digital-identity">
+          <span class="mode-icon">[Q]</span>
+          <span class="mode-label">ID クイズ</span>
+          <span class="mode-desc">デジタルアイデンティティ特化</span>
+        </button>
+        <button class="mode-card" data-go="flashcard" data-category="digital-identity">
+          <span class="mode-icon">[F]</span>
+          <span class="mode-label">ID カード</span>
+          <span class="mode-desc">デジタルアイデンティティ特化</span>
+        </button>
       </div>
-    </section>
-    <section class="card">
-      <h3>進捗サマリー</h3>
-      <p>累計正解 / 累計挑戦: <strong>${totalCorrect}</strong> / <strong>${totalAttempted}</strong></p>
-      <p><small>「一覧・検索」タブでは、RFCごとの学習状況を詳細に確認できます。</small></p>
     </section>
   `;
 

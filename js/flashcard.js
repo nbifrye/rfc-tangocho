@@ -11,7 +11,7 @@ export function renderFlashcard(container, data, options = {}) {
   container.innerHTML = `
     <section class="card">
       <h2>フラッシュカード設定</h2>
-      <div class="grid two">
+      <div class="form-grid grid two">
         <label>カテゴリ
           <select id="flashcard-category">
             <option value="all" ${initialCategory === 'all' ? 'selected' : ''}>全カテゴリ</option>
@@ -23,9 +23,11 @@ export function renderFlashcard(container, data, options = {}) {
               .join('')}
           </select>
         </label>
-        <label class="check-option"><input id="flashcard-obsoleted" type="checkbox" /><span>廃止済みRFCを含める</span></label>
+        <div style="display:flex;align-items:flex-end">
+          <label class="check-option" style="width:100%"><input id="flashcard-obsoleted" type="checkbox" /><span>廃止済みRFCを含める</span></label>
+        </div>
       </div>
-      <button class="btn" id="start-flashcard">開始</button>
+      <button class="btn btn-wide" id="start-flashcard">開始</button>
     </section>
     <section id="flashcard-stage"></section>
   `;
@@ -56,18 +58,20 @@ function runDeck(stage, initialDeck, categoryMap) {
 
   function buildFrontFace(card, categoryLabel) {
     return `
+      <p class="flashcard-hint">RFC NUMBER</p>
       <p class="flashcard-rfc">RFC ${card.number}</p>
       <p class="flashcard-title">${card.name}</p>
-      <p class="flashcard-summary">${card.note ?? '概要情報なし'}</p>
-      <small>${categoryLabel}</small>
+      <p class="flashcard-note">${card.note ?? '概要情報なし'}</p>
+      <p class="flashcard-category">${categoryLabel}</p>
     `;
   }
 
   function buildBackFace(card, categoryLabel) {
     return `
+      <p class="flashcard-hint">FULL NAME</p>
       <p class="flashcard-title">${card.name}</p>
-      <p class="flashcard-summary">${card.note ?? '概要情報なし'}</p>
-      <small>${card.shortName ? `略称: ${card.shortName} / ` : ''}${categoryLabel}</small>
+      <p class="flashcard-note">${card.note ?? '概要情報なし'}</p>
+      <p class="flashcard-category">${card.shortName ? `略称: ${card.shortName} · ` : ''}${categoryLabel}</p>
     `;
   }
 
@@ -75,8 +79,9 @@ function runDeck(stage, initialDeck, categoryMap) {
     if (deck.length === 0) {
       stage.innerHTML = `
         <article class="card">
-          <p class="result">完了！すべてのカードを覚えました。</p>
-          <button class="btn" id="restart-deck">最初からやり直す</button>
+          <p class="result-score" style="font-size:2rem">完了</p>
+          <p class="result-label">すべてのカードを学習しました</p>
+          <button class="btn btn-wide" id="restart-deck">最初からやり直す</button>
         </article>
       `;
       stage.querySelector('#restart-deck').addEventListener('click', () => runDeck(stage, initialDeck, categoryMap));
@@ -88,16 +93,16 @@ function runDeck(stage, initialDeck, categoryMap) {
 
     stage.innerHTML = `
       <article class="card">
-        <p>${initialDeck.length - deck.length + 1} / ${initialDeck.length}</p>
+        <p class="flashcard-counter">${initialDeck.length - deck.length + 1} / ${initialDeck.length}</p>
         <div class="flashcard" role="button" tabindex="0" id="flip-card" aria-label="カードをめくる">
           <div class="flashcard-face">
             ${showingBack ? buildBackFace(card, categoryLabel) : buildFrontFace(card, categoryLabel)}
           </div>
         </div>
-        <small>クリックまたはEnter/Spaceで表裏を切り替え</small>
-        <div class="grid two">
-          <button class="btn" id="known-btn">覚えた</button>
-          <button class="btn" id="again-btn">もう一度</button>
+        <p class="flashcard-hint-label">クリックまたは Enter / Space でめくる</p>
+        <div class="flashcard-actions">
+          <button class="btn btn-known" id="known-btn">覚えた ✓</button>
+          <button class="btn btn-again" id="again-btn">もう一度</button>
         </div>
       </article>
     `;
