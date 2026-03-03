@@ -23,14 +23,16 @@ function renderHome() {
   const progress = isStorageAvailable() ? getProgress() : {};
   const totalAttempted = Object.values(progress).reduce((sum, entry) => sum + (entry.attempted ?? 0), 0);
   const totalCorrect = Object.values(progress).reduce((sum, entry) => sum + (entry.correct ?? 0), 0);
+  const accuracy = totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0;
 
   app.innerHTML = `
     <section class="card hero">
-      <h2>学習モードを選択</h2>
-      <p>RFC番号と正式名称の対応を、クイズとフラッシュカードで効率よく覚えましょう。</p>
+      <h2>今日のRFC学習をはじめよう</h2>
+      <p>モバイルでも快適に、短時間でRFC番号と名称の対応を定着させる学習設計です。</p>
       <div class="hero-stats">
         <div class="stat-chip"><strong>${totalCorrect}</strong>累計正解数</div>
         <div class="stat-chip"><strong>${totalAttempted}</strong>累計挑戦数</div>
+        <div class="stat-chip"><strong>${accuracy}%</strong>正解率</div>
       </div>
     </section>
     <section class="card">
