@@ -39,7 +39,11 @@ function filterQuizPool(rfcs, settings) {
   return shuffle(pool);
 }
 
-export function renderQuiz(container, data) {
+export function renderQuiz(container, data, options = {}) {
+  const initialCategory = data.categories.some((category) => category.id === options.initialCategory)
+    ? options.initialCategory
+    : 'all';
+
   container.innerHTML = `
     <section class="card">
       <h2>クイズ設定</h2>
@@ -59,8 +63,13 @@ export function renderQuiz(container, data) {
         </label>
         <label>カテゴリ
           <select name="category">
-            <option value="all">全カテゴリ</option>
-            ${data.categories.map((category) => `<option value="${category.id}">${category.label}</option>`).join('')}
+            <option value="all" ${initialCategory === 'all' ? 'selected' : ''}>全カテゴリ</option>
+            ${data.categories
+              .map(
+                (category) =>
+                  `<option value="${category.id}" ${initialCategory === category.id ? 'selected' : ''}>${category.label}</option>`
+              )
+              .join('')}
           </select>
         </label>
         <label><input type="checkbox" name="includeObsoleted" /> 廃止済みRFCを含める</label>

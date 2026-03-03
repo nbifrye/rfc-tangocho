@@ -8,6 +8,10 @@ const app = document.querySelector('#app');
 const navButtons = [...document.querySelectorAll('.nav-btn')];
 
 let dataStore;
+const learningFocus = {
+  quizCategory: 'all',
+  flashcardCategory: 'all',
+};
 
 function setActiveView(view) {
   navButtons.forEach((button) => {
@@ -37,6 +41,14 @@ function renderHome() {
       </div>
     </section>
     <section class="card">
+      <h3>ジャンル特化で学ぶ</h3>
+      <p>まずはデジタルアイデンティティ関連のRFCに集中して学習できます。</p>
+      <div class="grid two">
+        <button class="btn" data-go="quiz" data-category="digital-identity">デジタルアイデンティティクイズ</button>
+        <button class="btn" data-go="flashcard" data-category="digital-identity">デジタルアイデンティティカード</button>
+      </div>
+    </section>
+    <section class="card">
       <h3>進捗サマリー</h3>
       <p>累計正解 / 累計挑戦: <strong>${totalCorrect}</strong> / <strong>${totalAttempted}</strong></p>
       <p><small>「一覧・検索」タブでは、RFCごとの学習状況を詳細に確認できます。</small></p>
@@ -44,22 +56,32 @@ function renderHome() {
   `;
 
   app.querySelectorAll('[data-go]').forEach((button) => {
-    button.addEventListener('click', () => navigate(button.dataset.go));
+    button.addEventListener('click', () => navigate(button.dataset.go, { category: button.dataset.category }));
   });
 }
 
-function navigate(view) {
+function navigate(view, options = {}) {
   setActiveView(view);
+
+  if (options.category) {
+    if (view === 'quiz') {
+      learningFocus.quizCategory = options.category;
+    }
+    if (view === 'flashcard') {
+      learningFocus.flashcardCategory = options.category;
+    }
+  }
+
   if (!dataStore || dataStore.rfcs.length === 0) {
     app.innerHTML = '<p class="notice">データが登録されていません。</p>';
     return;
   }
   switch (view) {
     case 'quiz':
-      renderQuiz(app, dataStore);
+      renderQuiz(app, dataStore, { initialCategory: learningFocus.quizCategory });
       break;
     case 'flashcard':
-      renderFlashcard(app, dataStore);
+      renderFlashcard(app, dataStore, { initialCategory: learningFocus.flashcardCategory });
       break;
     case 'search':
       renderSearch(app, dataStore);
