@@ -46,6 +46,23 @@ function runDeck(stage, initialDeck, categoryMap) {
   let deck = [...initialDeck];
   let showingBack = false;
 
+  function buildFrontFace(card, categoryLabel) {
+    return `
+      <p class="flashcard-rfc">RFC ${card.number}</p>
+      <p class="flashcard-title">${card.name}</p>
+      <p class="flashcard-summary">${card.note ?? '概要情報なし'}</p>
+      <small>${categoryLabel}</small>
+    `;
+  }
+
+  function buildBackFace(card, categoryLabel) {
+    return `
+      <p class="flashcard-title">${card.name}</p>
+      <p class="flashcard-summary">${card.note ?? '概要情報なし'}</p>
+      <small>${card.shortName ? `略称: ${card.shortName} / ` : ''}${categoryLabel}</small>
+    `;
+  }
+
   function renderCard() {
     if (deck.length === 0) {
       stage.innerHTML = `
@@ -66,9 +83,10 @@ function runDeck(stage, initialDeck, categoryMap) {
         <p>${initialDeck.length - deck.length + 1} / ${initialDeck.length}</p>
         <div class="flashcard" role="button" tabindex="0" id="flip-card" aria-label="カードをめくる">
           <div class="flashcard-face">
-            ${showingBack ? `${card.name}<br/><small>${card.shortName ?? ''}</small><br/><small>${card.note ?? ''}</small>` : `RFC ${card.number}<br/><small>${categoryLabel}</small>`}
+            ${showingBack ? buildBackFace(card, categoryLabel) : buildFrontFace(card, categoryLabel)}
           </div>
         </div>
+        <small>クリックまたはEnter/Spaceで表裏を切り替え</small>
         <div class="grid two">
           <button class="btn" id="known-btn">覚えた</button>
           <button class="btn" id="again-btn">もう一度</button>

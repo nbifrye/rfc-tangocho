@@ -268,6 +268,22 @@ select:focus,
   font-weight: 800;
 }
 
+.flashcard-rfc {
+  margin: 0;
+  color: #1d4ed8;
+}
+
+.flashcard-title {
+  margin: 0.35rem 0;
+}
+
+.flashcard-summary {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
 .result {
   font-size: 1.12rem;
   font-weight: 800;
