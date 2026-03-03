@@ -60,6 +60,12 @@ h1 {
   font-size: clamp(1.4rem, 2.9vw, 2rem);
 }
 
+h2,
+h3 {
+  margin: 0 0 0.72rem;
+  line-height: 1.35;
+}
+
 .tagline {
   margin: 0.22rem 0 0;
   color: var(--muted);
@@ -182,6 +188,34 @@ fieldset {
 legend {
   color: #4338ca;
   font-weight: 700;
+}
+
+.check-option {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.58rem;
+  border: 1px solid #d7e0ff;
+  border-radius: 0.82rem;
+  background: #fff;
+  padding: 0.62rem 0.72rem;
+  font-weight: 600;
+}
+
+.check-option input[type='checkbox'] {
+  accent-color: var(--primary);
+  inline-size: 1rem;
+  block-size: 1rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.check-option:has(input:checked) {
+  border-color: #a5b4fc;
+  background: var(--primary-soft);
+}
+
+.check-option:has(input:disabled) {
+  opacity: 0.65;
 }
 
 input,
@@ -367,12 +401,39 @@ small {
 }
 
 @media (max-width: 759px) {
+  body {
+    padding-top: 0.35rem;
+  }
+
   .site-header {
+    padding-top: max(0.9rem, env(safe-area-inset-top));
     padding-bottom: 0.35rem;
   }
 
+  .branding {
+    padding-top: 0.55rem;
+  }
+
+  h1 {
+    font-size: 1.32rem;
+  }
+
   .tagline {
+    margin-top: 0.32rem;
     font-size: 0.83rem;
+  }
+
+  .hero {
+    padding-top: 1.18rem;
+  }
+
+  .hero h2 {
+    font-size: clamp(1.75rem, 7.2vw, 2.15rem);
+    margin-bottom: 0.82rem;
+  }
+
+  .check-option {
+    font-size: 0.9rem;
   }
 
   .nav-tabs {

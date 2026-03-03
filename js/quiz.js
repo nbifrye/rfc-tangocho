@@ -72,8 +72,8 @@ export function renderQuiz(container, data, options = {}) {
               .join('')}
           </select>
         </label>
-        <label><input type="checkbox" name="includeObsoleted" /> 廃止済みRFCを含める</label>
-        <label><input type="checkbox" name="weakOnly" ${isStorageAvailable() ? '' : 'disabled'} /> 苦手問題のみ出題</label>
+        <label class="check-option"><input type="checkbox" name="includeObsoleted" /><span>廃止済みRFCを含める</span></label>
+        <label class="check-option"><input type="checkbox" name="weakOnly" ${isStorageAvailable() ? '' : 'disabled'} /><span>苦手問題のみ出題</span></label>
       </form>
       <button class="btn" id="start-quiz">開始</button>
     </section>
